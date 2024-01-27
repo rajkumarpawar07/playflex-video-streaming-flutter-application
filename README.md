@@ -1,16 +1,18 @@
-# login_flutter_app
+# Playflex - Video Streaming Application
 
-A new Flutter project.
+# Tech
+- Flutter
+- Dart
+- ALAN AI voice assistant 
+- Naive Bayes Machine Learning (Sentiment Analysis)
+- TMDB APIs
+- Firebase
+- Hive
+- Python (Flask)
 
-## Getting Started
+![smartmockups_lpp9en1m](https://github.com/rajkumarpawar07/playflex-video-streaming-flutter-application/assets/100755016/540f1ea4-306f-4b1b-91cf-838f63327cff)
+![smartmockups_lpp9daz9](https://github.com/rajkumarpawar07/playflex-video-streaming-flutter-application/assets/100755016/f4a556bb-2d06-4b28-87fe-d05bf76e0136)
+![smartmockups_lpp9kmqs](https://github.com/rajkumarpawar07/playflex-video-streaming-flutter-application/assets/100755016/6266aba0-d282-47f7-a8de-3f853ee6f424)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
