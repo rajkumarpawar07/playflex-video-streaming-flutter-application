@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
   /// setup Alan Ai Voice Assistant
   setupAlan() {
     AlanVoice.addButton(
-        "a6f7149dd1b7c6f03c53e9d6d479db162e956eca572e1d8b807a3e2338fdd0dc/stage", // real
-        // "a6f7149dd1b7c6f03c53e9d6d479db162e956eca572e1d8b807a3e2338fdd0dc/stagee", // fake
+        "api key", // real
+      
         buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
     AlanVoice.callbacks.add((command) => handleCommand(command.data));
     // AlanVoice.addConnectionCallback((state) => handleCommand(state));
