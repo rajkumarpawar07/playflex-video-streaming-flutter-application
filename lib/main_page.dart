@@ -5,10 +5,12 @@ import 'package:login_flutter_app/pages/explore.dart';
 import 'package:login_flutter_app/pages/home_page.dart';
 import 'package:login_flutter_app/pages/liked.dart';
 import 'package:login_flutter_app/src/features/core/screens/dashboard/profile/profile_screen.dart';
+import 'package:login_flutter_app/src/features/core/screens/dashboard/profile/update_profile_screen.dart';
 import 'package:login_flutter_app/utils.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final int screenCount;
+  const MainPage({Key? key, this.screenCount = 0}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -29,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const ExplorePage(),
     const Liked(),
-    const ProfileScreen(),
+    const UpdateProfileScreen(),
   ];
   int currentIndex = 0;
 
@@ -37,6 +39,14 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.screenCount != 0) {
+      onTap(widget.screenCount);
+    }
   }
 
   void handleCommand(Map<String, dynamic> responce) {}

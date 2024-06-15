@@ -31,7 +31,6 @@ class _myPageState extends State<SentimentAnyalisScreen> {
     });
     try {
       final response = await http.post(
-        // Uri.parse('http://192.168.29.234:5000/search_movie'),
         Uri.parse('https://playflex-flask-server1.onrender.com/search_movie'),
         headers: {
           'Content-Type': 'application/json', // Set the correct content type
@@ -72,47 +71,48 @@ class _myPageState extends State<SentimentAnyalisScreen> {
   }
 
   /// function that will execute on onTap of movie name
-  Future<void> fetchMovieDetails(String type) async {
-    setState(() {
-      isLoading2 = true;
-    });
-    try {
-      // Make the GET request
-      print(type);
-      final response = await http
-          // .get(Uri.parse('http://192.168.29.234:5000/responsed_url/$type'));
-          .get(Uri.parse(
-              'https://playflex-flask-server1.onrender.com/responsed_url/$type'));
-
-      // Check if the request was successful (status code 200)
-      if (response.statusCode == 200) {
-        setState(() {
-          isLoading2 = false;
-        });
-        print(response.body);
-        Get.to(() => MovieReviewScreen(
-            jsonResponse: json.decode(response.body), isLoading: isLoading2));
-      } else {
-        // Handle the error if the request was not successful
-        print(
-            'Failed to load movie details. Status code: ${response.statusCode}');
-        setState(() {
-          isLoading2 = false;
-        });
-      }
-    } catch (error) {
-      // Handle any exceptions that may occur
-      print('Error: $error');
-      setState(() {
-        isLoading2 = false;
-      });
-    }
-  }
+  // Future<void> fetchMovieDetails(String type) async {
+  //   setState(() {
+  //     isLoading2 = true;
+  //   });
+  //   try {
+  //     // Make the GET request
+  //     print(type);
+  //     final response = await http
+  //         // .get(Uri.parse('http://192.168.29.234:5000/responsed_url/$type'));
+  //         .get(Uri.parse(
+  //             'https://playflex-flask-server1.onrender.com/responsed_url/$type'));
+  //
+  //     // Check if the request was successful (status code 200)
+  //     if (response.statusCode == 200) {
+  //       setState(() {
+  //         isLoading2 = false;
+  //       });
+  //       print(response.body);
+  //       Get.to(() => MovieReviewScreen(
+  //           jsonResponse: json.decode(response.body), isLoading: isLoading2));
+  //     } else {
+  //       // Handle the error if the request was not successful
+  //       print(
+  //           'Failed to load movie details. Status code: ${response.statusCode}');
+  //       setState(() {
+  //         isLoading2 = false;
+  //       });
+  //     }
+  //   } catch (error) {
+  //     // Handle any exceptions that may occur
+  //     print('Error: $error');
+  //     setState(() {
+  //       isLoading2 = false;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
         toolbarHeight: 60,
         flexibleSpace: Container(
@@ -127,90 +127,112 @@ class _myPageState extends State<SentimentAnyalisScreen> {
         ),
         elevation: 20,
         title: Text(
-          "Movie Reviews",
+          "Sentiment Analysis",
           style: GoogleFonts.poppins(
               fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                label: Text(
-                  "Enter Movie Name",
-                  style: TextStyle(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: const BorderSide(color: Colors.white)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: const BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: const BorderSide(color: Colors.white)),
-              ),
-              onChanged: (text) {
-                movie_name = text;
-              },
-              // controller: _textFieldController,
-            ),
-            SizedBox(height: 20),
-            MyElevatedButton(
-              width: double.infinity,
-              onPressed: _postData,
-              borderRadius: BorderRadius.circular(50),
-              child: Text(
-                'SEARCH',
-                style: GoogleFonts.poppins(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ),
-            SizedBox(height: 20),
-            isLoading
-                ? Center(
-                    child: Lottie.asset(
-                      width: 100,
-                      'assets/lattie_animations/loading.json',
-                    ),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: _movies.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Text(
-                              _movies[index],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20),
-                            ),
-                          ),
-                          onTap: () async {
-                            await fetchMovieDetails(
-                                _movieIds[index].toString());
-                          },
-                          // subtitle: Text('ID: ${_movieIds[index]}'),
-                        );
-                      },
-                    ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              TextField(
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  label: Text(
+                    "Enter Movie Name",
+                    style: TextStyle(color: Colors.white),
                   ),
-          ],
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: const BorderSide(color: Colors.white)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      borderSide: const BorderSide(color: Colors.white)),
+                ),
+                onChanged: (text) {
+                  movie_name = text;
+                },
+                // controller: _textFieldController,
+              ),
+              SizedBox(height: 20),
+              MyElevatedButton(
+                width: double.infinity,
+                onPressed: _postData,
+                borderRadius: BorderRadius.circular(50),
+                child: Text(
+                  'SEARCH',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 20),
+              _movies.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text(
+                        "Related movies",
+                        style: GoogleFonts.poppins(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                    )
+                  : Container(),
+              isLoading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.asset(
+                          width: 70,
+                          'assets/lattie_animations/loading.json',
+                        ),
+                      ],
+                    )
+                  : Expanded(
+                      child: ListView.builder(
+                        itemCount: _movies.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Text(
+                                _movies[index],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    fontSize: 16),
+                              ),
+                            ),
+                            onTap: () async {
+                              Get.to(() => MovieReviewScreen(
+                                    movieType: _movieIds[index].toString(),
+                                  ));
+                              // await fetchMovieDetails(
+                              //     _movieIds[index].toString());
+                            },
+                            // subtitle: Text('ID: ${_movieIds[index]}'),
+                          );
+                        },
+                      ),
+                    ),
+            ],
+          ),
         ),
       ),
     );

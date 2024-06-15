@@ -23,7 +23,7 @@ class UpcomingMovies extends StatelessWidget {
                 Text(
                   'Upcoming Movies',
                   style: GoogleFonts.poppins(
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),

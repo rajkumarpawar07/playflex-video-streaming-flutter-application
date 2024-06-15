@@ -10,19 +10,19 @@ class TTextTheme {
   TTextTheme._(); // to avoid creating instances
 
   static TextTheme lightTextTheme = TextTheme(
-    headline1: GoogleFonts.montserrat(
+    headlineLarge: GoogleFonts.montserrat(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: tDarkColor),
-    headline2: GoogleFonts.montserrat(
+    headlineMedium: GoogleFonts.montserrat(
         fontSize: 24.0, fontWeight: FontWeight.w700, color: tDarkColor),
-    headline3: GoogleFonts.poppins(
+    headlineSmall: GoogleFonts.poppins(
         fontSize: 24.0, fontWeight: FontWeight.w700, color: tDarkColor),
-    headline4: GoogleFonts.poppins(
+    bodySmall: GoogleFonts.poppins(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: tDarkColor),
-    headline6: GoogleFonts.poppins(
+    bodyLarge: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.w600, color: tDarkColor),
-    bodyText1: GoogleFonts.poppins(
+    bodyMedium: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: tDarkColor),
-    bodyText2: GoogleFonts.poppins(
+    titleLarge: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: tDarkColor),
     // bodyMedium: GoogleFonts.poppins(
     //   color: Colors.black,
@@ -36,19 +36,19 @@ class TTextTheme {
   );
 
   static TextTheme darkTextTheme = TextTheme(
-    headline1: GoogleFonts.montserrat(
+    headlineLarge: GoogleFonts.montserrat(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: tWhiteColor),
-    headline2: GoogleFonts.montserrat(
+    headlineMedium: GoogleFonts.montserrat(
         fontSize: 24.0, fontWeight: FontWeight.w700, color: tWhiteColor),
-    headline3: GoogleFonts.poppins(
+    headlineSmall: GoogleFonts.poppins(
         fontSize: 24.0, fontWeight: FontWeight.w700, color: tWhiteColor),
-    headline4: GoogleFonts.poppins(
+    bodySmall: GoogleFonts.poppins(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: tWhiteColor),
-    headline6: GoogleFonts.poppins(
+    bodyLarge: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.w600, color: tWhiteColor),
-    bodyText1: GoogleFonts.poppins(
+    bodyMedium: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: tWhiteColor),
-    bodyText2: GoogleFonts.poppins(
+    titleLarge: GoogleFonts.poppins(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: tWhiteColor),
     // bodyMedium: GoogleFonts.poppins(
     //   color: Colors.white,

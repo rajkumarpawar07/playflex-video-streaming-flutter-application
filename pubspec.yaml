@@ -44,12 +44,12 @@ dependencies:
   lottie: ^2.6.0
   liquid_swipe: ^3.1.0
   smooth_page_indicator: ^1.1.0
-  get: ^4.6.5
+  get: ^4.6.6
   flutter_otp_text_field: ^1.1.1
   firebase_core: ^2.15.1
   firebase_auth: ^4.9.0
   line_awesome_flutter: ^2.0.0
-  cloud_firestore: ^4.9.1
+  cloud_firestore: ^4.10.0
   google_sign_in: ^6.1.5
   flutter_bloc: ^8.1.1
   flutter_rating_bar: ^4.0.1
@@ -58,7 +58,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.12
-  readmore: ^2.2.0
+  readmore: ^3.0.0
   shimmer: ^2.0.0
   stream_transform: ^2.1.0
   url_launcher: ^6.1.8
@@ -71,6 +71,7 @@ dependencies:
   video_player: ^2.8.1
   chewie: ^1.7.4
   retry: ^3.1.2
+  flutter_native_splash: ^2.4.0
 
 
 
@@ -78,6 +79,7 @@ dev_dependencies:
   build_runner: ^2.3.3
   flutter_launcher_icons: ^0.13.1
 
+#launcher icon
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
@@ -95,6 +97,7 @@ flutter_launcher_icons:
 
 
 
+
   flutter_test:
     sdk: flutter
 
@@ -108,19 +111,20 @@ flutter_launcher_icons:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-#flutter_native_splash:
-#  color: "#f7f9f1"
-#  color_dark: "#272727"
-#  image: assets/images/netflix_logo_bg.png
-#  image_dark: assets/images/netflix_logo_bg.png
-#
-#  android_12:
-#    image: assets/images/netflix_logo_bg.png
-#    icon_background_color: "#f7f9f1"
-#    image_dark: assets/images/netflix_logo_bg.png
-#    icon_background_color_dark: "#272727"
-#
-#    web: false
+# native splash screen
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#FFFFFF"
+  image: assets/images/logopromax.png
+  image_dark: assets/images/logopromax.png
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#FFFFFF"
+    image: assets/images/logopromax.png
+    image_dark: assets/images/logopromax.png
+
+    web: false
 
 # The following section is specific to Flutter packages.
 flutter:

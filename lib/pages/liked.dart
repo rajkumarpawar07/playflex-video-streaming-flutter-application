@@ -142,8 +142,8 @@ class Liked extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: IconButton(
-                                            onPressed: () {
-                                              liked.delete();
+                                            onPressed: () async {
+                                              await liked.delete();
                                               if (box.values.length > 3) {
                                                 controller.jumpToPage(
                                                   index,

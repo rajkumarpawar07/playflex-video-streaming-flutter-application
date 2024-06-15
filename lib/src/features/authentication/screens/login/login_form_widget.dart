@@ -46,6 +46,7 @@ class _LoginFormState extends State<LoginForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              style: TextStyle(color: Colors.black),
               controller: controller.email,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.person_outline_outlined),
@@ -58,6 +59,7 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: tFormHeight - 20),
             Obx(
               () => TextFormField(
+                style: TextStyle(color: Colors.black),
                 controller: controller.password,
                 obscureText: controller.showPassword.value ? false : true,
                 decoration: InputDecoration(
@@ -83,7 +85,10 @@ class _LoginFormState extends State<LoginForm> {
                   onPressed: () {
                     ForgetPasswordScreen.buildShowModalBottomSheet(context);
                   },
-                  child: const Text(tForgetPassword)),
+                  child: const Text(
+                    tForgetPassword,
+                    style: TextStyle(color: Colors.blue),
+                  )),
             ),
             SizedBox(
               width: double.infinity,

@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_flutter_app/src/features/authentication/controllers/otp_controller.dart';
 
+import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 
@@ -17,6 +18,7 @@ class OTPScreen extends StatelessWidget {
     var otpController = Get.put(OTPController());
     var otp;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         padding: const EdgeInsets.all(tDefaultSize),
         child: Column(
@@ -25,12 +27,26 @@ class OTPScreen extends StatelessWidget {
             Text(
               tOtpTitle,
               style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold, fontSize: 80.0),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 80.0,
+                  color: Colors.black),
             ),
-            Text(tOtpSubTitle.toUpperCase(),
-                style: Theme.of(context).textTheme.headline6),
-            const SizedBox(height: 40.0),
-            const Text("$tOtpMessage", textAlign: TextAlign.center),
+            Text(
+              tOtpSubTitle.toUpperCase(),
+              style: GoogleFonts.poppins(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                  color: tDarkColor),
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              "$tOtpMessage",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                  color: tDarkColor),
+            ),
             const SizedBox(height: 20.0),
             OtpTextField(
                 mainAxisAlignment: MainAxisAlignment.center,

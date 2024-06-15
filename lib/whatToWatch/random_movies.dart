@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 import '../models/movie_model.dart';
 import '../pages/detail_page.dart';
@@ -28,10 +29,12 @@ class _randomMoviesState extends State<randomMovies> {
       future: widget.future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // While the future is still loading, display a loading indicator.
-          return CircularProgressIndicator();
+          return Center(
+              child: Lottie.asset(
+            width: 70,
+            'assets/lattie_animations/loading.json',
+          ));
         } else if (snapshot.hasError) {
-          // If there is an error, display an error message or fallback UI.
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
           var data = snapshot.data?.results;
@@ -107,7 +110,10 @@ class _randomMoviesState extends State<randomMovies> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.date_range),
+                                  const Icon(
+                                    Icons.date_range,
+                                    size: 20,
+                                  ),
                                   Text(
                                     data[index].releaseDate == null
                                         ? data[index]
@@ -119,19 +125,22 @@ class _randomMoviesState extends State<randomMovies> {
                                             .toString()
                                             .substring(0, 4),
                                     style: GoogleFonts.poppins(
-                                      fontSize: 18.0,
+                                      fontSize: 16.0,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    width: 10,
                                   ),
-                                  const Icon(Icons.star),
+                                  const Icon(
+                                    Icons.star,
+                                    size: 20,
+                                  ),
                                   Text(
                                     data[index].voteAverage.toString(),
                                     style: GoogleFonts.poppins(
-                                      fontSize: 18.0,
+                                      fontSize: 16.0,
                                       fontWeight: FontWeight.w400,
                                       color: Colors.white,
                                     ),
@@ -145,11 +154,15 @@ class _randomMoviesState extends State<randomMovies> {
                                 ? getGenres(data[index].genreIds!)
                                 : '',
                             style: GoogleFonts.poppins(
-                              fontSize: 18.0,
+                              fontSize: 14.0,
                               fontWeight: FontWeight.w400,
                               color: Colors.white70,
                             ),
+                            textAlign: TextAlign.center,
                           ),
+                          SizedBox(
+                            height: 20,
+                          )
                         ],
                       ),
                     ),

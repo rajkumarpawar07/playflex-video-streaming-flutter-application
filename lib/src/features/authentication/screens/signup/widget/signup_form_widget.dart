@@ -60,6 +60,7 @@ class SignUpFormWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              style: TextStyle(color: Colors.black),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please Enter Your Name';
@@ -76,6 +77,7 @@ class SignUpFormWidget extends StatelessWidget {
 
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
+              style: TextStyle(color: Colors.black),
               validator: validateEmail,
               controller: controller.email,
               decoration: const InputDecoration(
@@ -88,12 +90,14 @@ class SignUpFormWidget extends StatelessWidget {
 
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
+              style: TextStyle(color: Colors.black),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please Enter Valid Phone Number';
                 }
                 return null;
               },
+              keyboardType: TextInputType.phone,
               controller: controller.phoneNo,
               decoration: const InputDecoration(
                 label: Text(tPhoneNo),
@@ -106,6 +110,7 @@ class SignUpFormWidget extends StatelessWidget {
             const SizedBox(height: tFormHeight - 20),
             Obx(
               () => TextFormField(
+                style: TextStyle(color: Colors.black),
                 validator: validatePassword,
                 obscureText: controller.showPassword.value ? false : true,
                 controller: controller.password,

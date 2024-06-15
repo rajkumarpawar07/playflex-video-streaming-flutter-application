@@ -48,10 +48,12 @@ class AuthenticationRepository extends GetxController {
   /// then in the main.dart => App() add CircularProgressIndicator()
   setInitialScreen(User? user) {
     user == null
-        ? Get.offAll(() => const splashScreen())
+        ? Get.offAll(() => const splashScreen(
+              screen: 1,
+            ))
         : user.emailVerified
-            ? Get.offAll(() => const MainPage())
-            : Get.offAll(() => const MailVerification());
+            ? Get.offAll(() => const splashScreen(screen: 2))
+            : Get.offAll(() => const splashScreen(screen: 2));
   }
 
   // google sign in
@@ -72,7 +74,7 @@ class AuthenticationRepository extends GetxController {
     } on FirebaseAuthException catch (e) {
       final ex = TExceptions.fromCode(e.code);
       throw ex.message;
-    } catch (_) {
+    } catch (e) {
       const ex = TExceptions();
       throw ex.message;
     }
@@ -129,7 +131,9 @@ class AuthenticationRepository extends GetxController {
           email: email, password: password);
       _firebaseUser.value != null
           ? Get.offAll(() => const ProfileScreen())
-          : Get.to(() => const splashScreen());
+          : Get.to(() => const splashScreen(
+                screen: 1,
+              ));
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       throw ex.message;

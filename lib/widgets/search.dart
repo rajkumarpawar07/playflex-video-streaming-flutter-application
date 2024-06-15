@@ -19,6 +19,12 @@ class Search extends SearchDelegate<Model> {
   }
 
   @override
+  TextStyle? get searchFieldStyle => TextStyle(
+        color: Colors.black, // Change this to your desired color
+        fontSize: 18.0,
+      );
+
+  @override
   Widget? buildLeading(BuildContext context) {
     return null;
   }
@@ -30,7 +36,9 @@ class Search extends SearchDelegate<Model> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           );
         } else if (snapshot.hasData) {
           final data = snapshot.data?.results;

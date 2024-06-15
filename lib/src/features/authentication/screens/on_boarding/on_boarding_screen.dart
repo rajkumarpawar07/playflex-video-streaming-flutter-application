@@ -33,7 +33,7 @@ class OnBoardingScreen extends StatelessWidget {
                 side: const BorderSide(color: Colors.black26),
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(20),
-                onPrimary: Colors.white,
+                foregroundColor: Colors.white,
               ),
               child: Container(
                 padding: const EdgeInsets.all(20.0),

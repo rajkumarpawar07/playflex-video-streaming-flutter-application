@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../forget_password_mail/forget_password_mail.dart';
@@ -18,10 +20,20 @@ class ForgetPasswordScreen {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(tForgetPasswordTitle,
-                style: Theme.of(context).textTheme.headline2),
-            Text(tForgetPasswordSubTitle,
-                style: Theme.of(context).textTheme.bodyText2),
+            Text(
+              tForgetPasswordTitle,
+              style: GoogleFonts.montserrat(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.w700,
+                  color: tDarkColor),
+            ),
+            Text(
+              tForgetPasswordSubTitle,
+              style: GoogleFonts.poppins(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.normal,
+                  color: tDarkColor),
+            ),
             const SizedBox(height: 30.0),
             ForgetPasswordBtnWidget(
               onTap: () {
@@ -33,12 +45,12 @@ class ForgetPasswordScreen {
               btnIcon: Icons.mail_outline_rounded,
             ),
             const SizedBox(height: 20.0),
-            ForgetPasswordBtnWidget(
-              onTap: () {},
-              title: tPhoneNo,
-              subTitle: tResetViaPhone,
-              btnIcon: Icons.mobile_friendly_rounded,
-            ),
+            // ForgetPasswordBtnWidget(
+            //   onTap: () {},
+            //   title: tPhoneNo,
+            //   subTitle: tResetViaPhone,
+            //   btnIcon: Icons.mobile_friendly_rounded,
+            // ),
           ],
         ),
       ),

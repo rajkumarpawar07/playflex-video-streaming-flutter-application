@@ -8,6 +8,7 @@ import '../../../repository/user_repository/user_repository.dart';
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
+  Rx<bool> showPassword = true.obs;
   //repository
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
@@ -15,6 +16,7 @@ class ProfileController extends GetxController {
   ///Get User Email and pass to UserRepository to fetch user record.
   getUserData() {
     final email = _authRepo.firebaseUser?.email;
+    print('Email: $email');
     if (email != null) {
       return _userRepo.getUserDetails(email);
     } else {

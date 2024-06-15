@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "954786387750-0ncni47cjsshefsrk2nmhvfc6v6ld4jp.apps.googleusercontent.com",
+          "client_id": "954786387750-ur91bub17a8nguhssm56qjsg22t8emuf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.login_flutter_app",
-            "certificate_hash": "a2840404b44fb4d8c8ac586daa75941a332a9878"
+            "certificate_hash": "b51471ff4efd761bc13d143045b34af7afd136b4"
           }
         },
         {
-          "client_id": "954786387750-2h0j6tbn3r4a852poj41n6167evq5gqd.apps.googleusercontent.com",
+          "client_id": "954786387750-p2e6fiil7fms0mb6e8g375b247jb90hr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

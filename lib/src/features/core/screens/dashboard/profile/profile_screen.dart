@@ -18,12 +18,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () => Get.back(),
-        //     icon: const Icon(LineAwesomeIcons.angle_left)),
         backgroundColor: Colors.transparent,
         toolbarHeight: 60,
         flexibleSpace: Container(
@@ -121,9 +117,10 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Text(tProfileHeading, style: Theme.of(context).textTheme.headline4),
+            Text(tProfileHeading,
+                style: Theme.of(context).textTheme.headlineMedium),
             Text(tProfileSubHeading,
-                style: Theme.of(context).textTheme.bodyText2),
+                style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 20),
 
             /// -- BUTTON

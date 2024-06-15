@@ -86,10 +86,10 @@ const String tForgetMailSubTitle =
 
 const String tOtpTitle = "CO\nDE";
 const String tOtpSubTitle = "Verification";
-const String tOtpMessage = "Enter the verification code sent at $tEmail ";
+const String tOtpMessage = "Enter the verification code sent on your $tEmail ";
 
 const String tProfile = "Profile";
-const String tEditProfile = "Edit Profile";
+const String tEditProfile = "Update Profile";
 const String tLogoutDialogHeading = "Logout";
 const String tProfileHeading = "Rajkumar Pawar";
 const String tProfileSubHeading = "pawarrajkumar020@gmail.com";

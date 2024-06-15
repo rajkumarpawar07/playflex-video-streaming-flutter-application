@@ -50,9 +50,6 @@ class _DetailPageState extends State<DetailPage> {
           color: (value == index) ? Colors.red : Colors.purple,
         ),
       ),
-      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      // borderSide:
-      //     BorderSide(color: (value == index) ? Colors.green : Colors.black),
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         side: BorderSide(color: (value == index) ? Colors.red : Colors.purple),

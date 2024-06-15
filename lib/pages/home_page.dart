@@ -6,6 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_flutter_app/pages/sentiment_analysis.dart';
 import 'package:login_flutter_app/whatToWatch/what_to_watch.dart';
+import '../AlanAI/trending screen.dart';
+import '../main_page.dart';
 import '../models/credit_model.dart';
 import '../models/movie_model.dart';
 import '../services/services.dart';
@@ -43,74 +45,50 @@ class _HomePageState extends State<HomePage> {
   setupAlan() {
     AlanVoice.addButton(
         "a6f7149dd1b7c6f03c53e9d6d479db162e956eca572e1d8b807a3e2338fdd0dc/stage", // real
-        // "a6f7149dd1b7c6f03c53e9d6d479db162e956eca572e1d8b807a3e2338fdd0dc/stagee", // fake
-        buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
+        buttonAlign: 0);
     AlanVoice.callbacks.add((command) => handleCommand(command.data));
-    // AlanVoice.addConnectionCallback((state) => handleCommand(state));
   }
 
   void handleCommand(Map<String, dynamic> responce) {
-    print("New command: ${responce}");
     switch (responce["command"]) {
       case "Navigate to trending page":
-        print("navigate to trending page");
         Get.to(() => ExplorePage());
         break;
-      case "movie details":
+      case "trending movie":
+        Get.to(() => TrendingScreenAlanAI(
+              future: trendingFuture,
+            ));
         break;
-      case "alan information":
+      case "wishlist screen":
+        Get.to(() => MainPage(
+              screenCount: 2,
+            ));
         break;
-      case "app information":
+      case "home screen back":
+        Get.to(() => MainPage(
+              screenCount: 0,
+            ));
         break;
       case "alan's favourite movie":
         break;
       case "go back":
-        Navigator.pop(context);
+        Get.back();
         break;
       default:
-        print("you entered ${responce["command"]}");
     }
   }
 
-  final _advancedDrawerController = AdvancedDrawerController();
-
   @override
   Widget build(BuildContext context) {
-    return AdvancedDrawer(
-      backdrop: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.purple,
-              Colors.red,
-            ],
-          ),
-        ),
-      ),
-      controller: _advancedDrawerController,
-      animationCurve: Curves.easeInOut,
-      animationDuration: const Duration(milliseconds: 300),
-      animateChildDecoration: true,
-      rtlOpening: false,
-      // openScale: 1.0,
-      disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        // NOTICE: Uncomment if you want to add shadow behind the page.
-        // Keep in mind that it may cause animation jerks.
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black,
-            blurRadius: 0.0,
-          ),
-        ],
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-      ),
-      drawer: SafeArea(
+    return Scaffold(
+      drawer: Drawer(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [Colors.red, Colors.purple],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight),
+          ),
           child: ListTileTheme(
             textColor: Colors.white,
             iconColor: Colors.white,
@@ -118,16 +96,19 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  width: 128.0,
-                  height: 128.0,
+                  height: 20,
+                  color: Colors.black,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 200.0,
                   margin: const EdgeInsets.only(
-                    top: 24.0,
-                    bottom: 64.0,
+                    top: 0.0,
+                    bottom: 0.0,
                   ),
                   clipBehavior: Clip.antiAlias,
                   decoration: const BoxDecoration(
-                    color: Colors.black26,
-                    shape: BoxShape.circle,
+                    color: Colors.black,
                   ),
                   child: Image.asset(
                     'assets/images/playflex_vect.png',
@@ -186,67 +167,47 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          toolbarHeight: 60,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.purple, Colors.red],
-                    begin: Alignment.bottomRight,
-                    end: Alignment.bottomLeft),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20))),
-          ),
-          actions: <Widget>[
-            // IconButton(
-            //   icon: const Icon(Icons.comment),
-            //   tooltip: 'Comment Icon',
-            //   onPressed: () {},
-            // ), //IconButton
-            IconButton(
-              icon: const Icon(Icons.settings),
-              tooltip: 'Setting Icon',
-              onPressed: () {},
-            ), //IconButton
-          ],
-          elevation: 20,
-          title: Text(
-            "Playflex",
-            style: GoogleFonts.poppins(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          ),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu_rounded),
-          ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 60,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Colors.purple, Colors.red],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.bottomLeft),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20))),
         ),
-        body: ListView(
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            UpcomingMovies(
-              future: upcomingFuture,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MoviesListView(future: trendingFuture, headlineText: 'Trending'),
-            MoviesListView(
-                future: popularMoviesFuture, headlineText: 'Popular Movies'),
-            MoviesListView(
-                future: popularTvFuture, headlineText: 'Popular TV Shows'),
-            MoviesListView(
-                future: topRatedFuture, headlineText: 'Top Rated Movies'),
-          ],
+        elevation: 20,
+        title: Text(
+          "Playflex",
+          style: GoogleFonts.poppins(
+              fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        centerTitle: true,
+      ),
+      body: ListView(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          UpcomingMovies(
+            future: upcomingFuture,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          MoviesListView(future: trendingFuture, headlineText: 'Trending'),
+          MoviesListView(
+              future: popularMoviesFuture, headlineText: 'Popular Movies'),
+          MoviesListView(
+              future: popularTvFuture, headlineText: 'Popular TV Shows'),
+          MoviesListView(
+              future: topRatedFuture, headlineText: 'Top Rated Movies'),
+        ],
       ),
     );
   }

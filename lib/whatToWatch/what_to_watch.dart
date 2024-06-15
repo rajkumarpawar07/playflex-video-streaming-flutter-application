@@ -11,6 +11,8 @@ import '../services/services.dart';
 import '../src/constants/colors.dart';
 import '../src/constants/image_strings.dart';
 import '../widgets/movies_listview.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class whatToWtach extends StatefulWidget {
   const whatToWtach({super.key});
@@ -24,8 +26,47 @@ class _whatToWtachState extends State<whatToWtach> {
 
   @override
   void initState() {
-    topRatedFuture = getTopRatedMovies();
+    // topRatedFuture = getTopRatedMovies();
+    // getRandomMovie(1);
+    topRatedFuture = getRandomMovie(28);
+
     super.initState();
+  }
+
+  Future<Model> getRandomMovie(int category) async {
+    final String apiKey = '685caa0e111d2a893e4f02d52df9587b';
+    final String language = 'en-US';
+    // try {
+    // Generate a random page number between 1 and 1000
+    final int randomPage = 1 + (DateTime.now().microsecondsSinceEpoch % 100);
+
+    final String url =
+        'https://api.themoviedb.org/3/discover/movie?api_key=$apiKey&language=$language&include_adult=false&with_genres=$category&page=$randomPage&sort_by=popularity.desc';
+
+    final http.Response response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+
+      // Choose a random movie from the results
+      final int randomIndex =
+          DateTime.now().microsecondsSinceEpoch % results.length;
+      final Map<String, dynamic> movieData = results[randomIndex];
+
+      print('random movie data: $movieData');
+      return modelFromJson(response.body);
+      // Create a Movie object from the selected movie data
+      // return Movie.fromJson(movieData);
+    } else {
+      throw Exception('failed to load top rated movies');
+
+      print('Failed to load random movie. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    // } catch (e) {
+    //   print('error $e');
+    // }
   }
 
   final String myAPI = '685caa0e111d2a893e4f02d52df9587b';
@@ -55,6 +96,7 @@ class _whatToWtachState extends State<whatToWtach> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
         toolbarHeight: 60,
         flexibleSpace: Container(
@@ -95,7 +137,10 @@ class _whatToWtachState extends State<whatToWtach> {
           color: Colors.black,
         ),
         onPressed: () {
-          _incrementCounter();
+          // _incrementCounter();
+          setState(() {
+            topRatedFuture = getRandomMovie(28);
+          });
         },
       ),
     );

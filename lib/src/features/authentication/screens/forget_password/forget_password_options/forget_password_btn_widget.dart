@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../../constants/colors.dart';
 
 class ForgetPasswordBtnWidget extends StatelessWidget {
   const ForgetPasswordBtnWidget({
@@ -25,13 +28,29 @@ class ForgetPasswordBtnWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(btnIcon, size: 60.0),
+            Icon(
+              btnIcon,
+              size: 60.0,
+              color: Colors.black,
+            ),
             const SizedBox(width: 10.0),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: Theme.of(context).textTheme.headline6),
-                Text(subTitle, style: Theme.of(context).textTheme.bodyText2),
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+                      color: tDarkColor),
+                ),
+                Text(
+                  subTitle,
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal,
+                      color: tDarkColor),
+                ),
               ],
             )
           ],

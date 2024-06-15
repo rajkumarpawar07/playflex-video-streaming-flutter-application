@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,7 @@ import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
+import '../../../../../repository/authentication_repository/authentication_repository.dart';
 import '../../../controllers/profile_controller.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
@@ -17,10 +20,10 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool showPassword = false;
     final controller = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         toolbarHeight: 60,
         flexibleSpace: Container(
@@ -33,14 +36,57 @@ class UpdateProfileScreen extends StatelessWidget {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20))),
         ),
-        leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(LineAwesomeIcons.angle_left)),
         title: Text(
-          tEditProfile,
+          "Profile",
           style: GoogleFonts.poppins(
               fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.defaultDialog(
+                title: "LOGOUT",
+                confirmTextColor: Colors.black,
+                titleStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                content: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(
+                    "Are you sure, you want to Logout?",
+                    style: GoogleFonts.poppins(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black),
+                  ),
+                ),
+                confirm: Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => AuthenticationRepository.instance.logout(),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        side: BorderSide.none),
+                    child: const Text("Yes"),
+                  ),
+                ),
+                cancel: OutlinedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, side: BorderSide.none),
+                    onPressed: () => Get.back(),
+                    child: const Text(
+                      "No",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              );
+            },
+            icon: Icon(
+              LineAwesomeIcons.alternate_sign_out,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -48,6 +94,13 @@ class UpdateProfileScreen extends StatelessWidget {
           child: FutureBuilder(
             future: controller.getUserData(),
             builder: (context, snapShot) {
+              if (snapShot.connectionState != ConnectionState.done) {
+                Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                );
+              }
               if (snapShot.connectionState == ConnectionState.done) {
                 if (snapShot.hasData) {
                   UserModel user = snapShot.data as UserModel;
@@ -86,8 +139,13 @@ class UpdateProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 50),
 
+                      const SizedBox(height: 10),
+                      Text(fullName.text,
+                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text(email.text,
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      const SizedBox(height: 50),
                       // -- Form Fields
                       Form(
                         child: Column(
@@ -175,37 +233,46 @@ class UpdateProfileScreen extends StatelessWidget {
                                   )),
                             ),
                             const SizedBox(height: tFormHeight - 20),
-                            TextFormField(
-                              controller: password,
-                              // initialValue: userData.password,
-                              style: TextStyle(color: Colors.white),
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  tPassword,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide:
-                                        const BorderSide(color: Colors.white)),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide:
-                                        const BorderSide(color: Colors.white)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide:
-                                        const BorderSide(color: Colors.white)),
-                                prefixIcon: const Icon(
-                                  Icons.fingerprint,
-                                  color: Colors.white,
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: showPassword
-                                      ? const Icon(LineAwesomeIcons.eye)
-                                      : const Icon(LineAwesomeIcons.eye_slash),
-                                  onPressed: () => showPassword = !showPassword,
+                            Obx(
+                              () => TextFormField(
+                                controller: password,
+                                // initialValue: userData.password,
+                                style: TextStyle(color: Colors.white),
+                                obscureText: controller.showPassword.value,
+                                decoration: InputDecoration(
+                                  label: const Text(
+                                    tPassword,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                      borderSide: const BorderSide(
+                                          color: Colors.white)),
+                                  prefixIcon: const Icon(
+                                    Icons.fingerprint,
+                                    color: Colors.white,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: controller.showPassword.value
+                                        ? const Icon(
+                                            LineAwesomeIcons.eye_slash,
+                                            color: Colors.white54,
+                                          )
+                                        : const Icon(
+                                            LineAwesomeIcons.eye,
+                                            color: Colors.white54,
+                                          ),
+                                    onPressed: () => controller.showPassword
+                                        .value = !controller.showPassword.value,
+                                  ),
                                 ),
                               ),
                             ),
@@ -237,35 +304,22 @@ class UpdateProfileScreen extends StatelessWidget {
                             const SizedBox(height: tFormHeight),
 
                             // -- Created Date and Delete Button
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text.rich(
-                                  TextSpan(
-                                    text: "Joined",
-                                    style: TextStyle(fontSize: 12),
-                                    children: [
-                                      TextSpan(
-                                          text: " 13 July 2023",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12))
-                                    ],
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Colors.redAccent.withOpacity(0.5),
-                                      elevation: 0,
-                                      foregroundColor: Colors.white,
-                                      shape: const StadiumBorder(),
-                                      side: BorderSide.none),
-                                  child: const Text("Delete"),
-                                ),
-                              ],
-                            )
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     ElevatedButton(
+                            //       onPressed: () {},
+                            //       style: ElevatedButton.styleFrom(
+                            //           backgroundColor:
+                            //               Colors.redAccent.withOpacity(0.5),
+                            //           elevation: 0,
+                            //           foregroundColor: Colors.white,
+                            //           shape: const StadiumBorder(),
+                            //           side: BorderSide.none),
+                            //       child: const Text("Delete"),
+                            //     ),
+                            //   ],
+                            // )
                           ],
                         ),
                       ),

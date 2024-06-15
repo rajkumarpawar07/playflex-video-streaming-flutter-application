@@ -18,6 +18,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDefaultSize),
@@ -37,10 +38,12 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
+                        style: TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                             label: Text(tEmail),
                             hintText: tEmail,
-                            prefixIcon: Icon(Icons.mail_outline_rounded)),
+                            prefixIcon: Icon(Icons.mail_outline_rounded,
+                                color: Colors.black87)),
                       ),
                       const SizedBox(height: 20.0),
                       SizedBox(
